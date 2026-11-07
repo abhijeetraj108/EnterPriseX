@@ -7,7 +7,10 @@ authors = [
     { name = "Abhijeet Raj", email = "abhiraj84452@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "langchain-aws>=1.9.2",
+    "pydantic>=2.14.3",
+]
 
 [project.scripts]
 enterprisex = "enterprisex:main"
@@ -15,3 +18,8 @@ enterprisex = "enterprisex:main"
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
