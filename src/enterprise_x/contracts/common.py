@@ -1,9 +1,8 @@
 from datetime import datetime, timezone
 from enum import Enum
-from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field
-from langchain_aws import ChatBedRockConverse
+from pydantic import BaseModel, ConfigDict
+
 
 def utc_now() -> datetime:
     return datetime.now(timezone.utc)
@@ -27,30 +26,3 @@ class Severity(str, Enum):
     MEDIUM = "medium"
     HIGH = "high"
     CRITICAL = "critical"
-
-
-class RiskLevel(str, Enum):
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
-    CRITICAL = "critical"
-
-
-class EntityReference(BaseContract):
-    """
-    Reference to an enterprise entity without copying
-    its complete database record.
-    """
-
-    entity_type: str
-    entity_id: str
-    display_name: str | None = None
-
-
-class ContractMetadata(BaseContract):
-    """
-    Metadata common to versioned contracts.
-    """
-
-    schema_version: str = "1.0"
-    created_at: datetime = Field(default_factory=utc_now)
