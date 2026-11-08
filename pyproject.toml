@@ -1,23 +1,23 @@
 [project]
 name = "enterprisex"
 version = "0.1.0"
-description = "Add your description here"
+description = "Financial invoice audit core"
 readme = "README.md"
 authors = [
     { name = "Abhijeet Raj", email = "abhiraj84452@gmail.com" }
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "langchain-aws>=1.9.2",
+    "httpx>=0.28.1",
     "pydantic>=2.14.3",
 ]
-
-[project.scripts]
-enterprisex = "enterprisex:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "enterprise_x"
 
 [dependency-groups]
 dev = [
