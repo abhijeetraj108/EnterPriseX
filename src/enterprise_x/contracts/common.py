@@ -1,28 +1,42 @@
-from datetime import datetime, timezone
-from enum import Enum
-
+from enum import StrEnum
 from pydantic import BaseModel, ConfigDict
 
 
-def utc_now() -> datetime:
-    return datetime.now(timezone.utc)
-
-
 class BaseContract(BaseModel):
-    """
-    Base class for all EnterpriseX shared contracts.
-    """
+    """Base class for all shared contracts."""
 
     model_config = ConfigDict(
         extra="forbid",
-        validate_assignment=True,
         str_strip_whitespace=True,
     )
 
 
-class Severity(str, Enum):
+class Department(StrEnum):
+    FINANCIAL = "financial"
+    CYBERSECURITY = "cybersecurity"
+
+
+class TaskStatus(StrEnum):
+    PENDING = "pending"
+    ACCEPTED = "accepted"
+    IN_PROGRESS = "in_progress"
+    COMPLETED = "completed"
+    PARTIALLY_COMPLETED = "partially_completed"
+    FAILED = "failed"
+
+
+class FindingSeverity(StrEnum):
     INFORMATIONAL = "informational"
     LOW = "low"
     MEDIUM = "medium"
     HIGH = "high"
     CRITICAL = "critical"
+
+
+class EvidenceType(StrEnum):
+    DOCUMENT = "document"
+    DATABASE_RECORD = "database_record"
+    API_RESPONSE = "api_response"
+    SECURITY_LOG = "security_log"
+    REPORT = "report"
+    OTHER = "other"
