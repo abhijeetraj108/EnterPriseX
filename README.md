@@ -203,6 +203,35 @@ uv sync
 uv run pytest -q
 ```
 
+## Run the ERP microservice and PostgreSQL
+
+The FastAPI ERP microservice uses the shared SQLAlchemy connection and stores
+ERP records in PostgreSQL's `erp` schema. On startup it creates that schema
+and idempotently seeds invoice, vendor, and purchase-order records from
+[`src/enterprise_x/integrations/erp/seed_data.json`](src/enterprise_x/integrations/erp/seed_data.json)
+without replacing records already in the database. The fixture stays separate
+from the service code for straightforward review and editing. Start both
+services with:
+
+```powershell
+docker compose up --build
+```
+
+The ERP API is available at `http://localhost:8000`; interactive API docs are
+at `http://localhost:8000/docs`. It provides
+`GET /api/v1/invoices/{invoice_id}`, `GET /api/v1/invoices`,
+`GET /api/v1/vendors/{vendor_id}`,
+`GET /api/v1/purchase-orders/{purchase_order_id}`, and `GET /health`.
+The seed includes a matching invoice, an invoice exceeding its purchase-order
+total, an invoice for an inactive vendor, and a vendor bank-account-change
+timestamp for audit context. To run only PostgreSQL, use
+`docker compose up -d postgres`.
+
+PostgreSQL is available at `localhost:5432` with database/user `enterprisex`.
+For local development the default password is `enterprisex_dev`; set
+`POSTGRES_PASSWORD` in `.env` before starting Compose to override it. The data persists
+in the `postgres_data` volume.
+
 ## Run the ERP MCP server
 
 The MCP server exposes these read-only resource templates:
@@ -258,6 +287,6 @@ invalid JSON, and schema validation errors are surfaced to the caller.
   review. Lower totals are allowed for partial invoices.
 - A matching invoice with no findings is marked clear.
 
-This slice is a library, not a running API or a database-backed service.
-Connecting a real ERP and adding persistence are later tasks. Cybersecurity,
-orchestration, and RAG are intentionally not part of this implementation yet.
+The ERP integration is a standalone microservice for development and testing,
+not a replacement for a production ERP. Cybersecurity, orchestration, and RAG
+are intentionally not part of this implementation yet.

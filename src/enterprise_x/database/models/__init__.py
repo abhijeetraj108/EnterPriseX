@@ -6,3 +6,9 @@ from enterprise_x.database.models.platform import (
 from enterprise_x.database.models.audit import (
     AuditEvent,
 )
+
+from enterprise_x.database.models.erp import (
+    ERPInvoice,
+    ERPPurchaseOrder,
+    ERPVendor,
+)

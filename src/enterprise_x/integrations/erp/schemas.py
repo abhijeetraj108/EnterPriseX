@@ -18,9 +18,9 @@ class InvoiceStatus(str, Enum):
 class Invoice(BaseContract):
     invoice_id: str = Field(min_length=1)
     vendor_id: str = Field(min_length=1)
-    purchase_order_id: str | None = None
+    purchase_order_id: str | None = Field(default=None, min_length=1)
     total_amount: Decimal = Field(gt=0)
-    currency: str = Field(min_length=3, max_length=3)
+    currency: str = Field(pattern=r"^[A-Z]{3}$")
     status: InvoiceStatus = InvoiceStatus.SUBMITTED
 
 
@@ -28,7 +28,7 @@ class PurchaseOrder(BaseContract):
     purchase_order_id: str = Field(min_length=1)
     vendor_id: str = Field(min_length=1)
     total_amount: Decimal = Field(gt=0)
-    currency: str = Field(min_length=3, max_length=3)
+    currency: str = Field(pattern=r"^[A-Z]{3}$")
 
 
 class Vendor(BaseContract):

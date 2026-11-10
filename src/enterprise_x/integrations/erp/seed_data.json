@@ -1,0 +1,63 @@
+{
+  "invoices": [
+    {
+      "invoice_id": "INV-801",
+      "vendor_id": "V-14",
+      "purchase_order_id": "PO-101",
+      "total_amount": "125.00",
+      "currency": "USD",
+      "status": "submitted"
+    },
+    {
+      "invoice_id": "INV-802",
+      "vendor_id": "V-22",
+      "purchase_order_id": "PO-204",
+      "total_amount": "2500.00",
+      "currency": "USD",
+      "status": "submitted"
+    },
+    {
+      "invoice_id": "INV-803",
+      "vendor_id": "V-31",
+      "purchase_order_id": "PO-307",
+      "total_amount": "900.00",
+      "currency": "EUR",
+      "status": "approved"
+    }
+  ],
+  "vendors": [
+    {
+      "vendor_id": "V-14",
+      "active": true
+    },
+    {
+      "vendor_id": "V-22",
+      "active": true,
+      "bank_account_changed_at": "2026-10-15T09:30:00Z"
+    },
+    {
+      "vendor_id": "V-31",
+      "active": false
+    }
+  ],
+  "purchase_orders": [
+    {
+      "purchase_order_id": "PO-101",
+      "vendor_id": "V-14",
+      "total_amount": "150.00",
+      "currency": "USD"
+    },
+    {
+      "purchase_order_id": "PO-204",
+      "vendor_id": "V-22",
+      "total_amount": "2400.00",
+      "currency": "USD"
+    },
+    {
+      "purchase_order_id": "PO-307",
+      "vendor_id": "V-31",
+      "total_amount": "900.00",
+      "currency": "EUR"
+    }
+  ]
+}
