@@ -7,18 +7,19 @@ from enterprise_x.config.setting import get_settings
 settings = get_settings()
 
 engine = create_engine(
-    settings.DATABASE_URL,
+    settings.sqlalchemy_database_url,
     pool_pre_ping=True,
     pool_size=5,
     max_overflow=10,
-    echo=False
+    echo=False,
 )
 
 SessionLocal = sessionmaker(
     bind=engine,
     autoflush=False,
-    expire_on_commit=False
+    expire_on_commit=False,
 )
+
 
 def get_db():
     db = SessionLocal()
